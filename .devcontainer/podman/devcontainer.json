@@ -1,0 +1,51 @@
+{
+    "name": "jupyterlab-devcontainer-podman",
+    "build": {
+        "dockerfile": "Dockerfile"
+    },
+    "features": {
+        "ghcr.io/devcontainers/features/common-utils:2": {
+            "installZsh": "false",
+            "installOhMyZsh": "false",
+            "installOhMyZshConfig": "false",
+            "username": "vscode",
+            "userUid": "1000",
+            "userGid": "1000",
+            "upgradePackages": "true"
+        },
+        "ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "dockerDashComposeVersion": "v2"
+        },
+        "ghcr.io/devcontainers/features/node:1": {}
+    },
+    "customizations": {
+        "vscode": {
+            "extensions": [
+                "ms-vsliveshare.vsliveshare",
+                "VisualStudioExptTeam.vscodeintellicode",
+                "streetsidesoftware.code-spell-checker",
+                "ms-azuretools.vscode-docker",
+                "yzhang.markdown-all-in-one",
+                "ms-python.python",
+                "pflannery.vscode-versionlens",
+                "timonwong.shellcheck",
+                "redhat.vscode-yaml",
+                "ritwickdey.LiveServer",
+                "donjayamanne.githistory",
+                "mhutchie.git-graph",
+                "github.vscode-github-actions",
+                "eamodio.gitlens",
+                "jock.svg",
+                "ms-toolsai.jupyter"
+            ]
+        }
+    },
+    "postCreateCommand": "npm install -g @devcontainers/cli",
+    "postStartCommand": "nohup bash -c 'jupyter lab --ip=0.0.0.0 --port=8888 > /dev/null 2>&1 &' > /dev/null 2>&1",
+    "runArgs": ["--userns=keep-id"],
+    "forwardPorts": [8888],
+    "containerEnv": {
+        "HOME": "/home/vscode"
+    },
+    "remoteUser": "vscode"
+}
